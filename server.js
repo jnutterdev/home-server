@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Static files
 const path = require('path');
-const { SSL_OP_MSIE_SSLV2_RSA_PADDING } = require("constants");
 
 // Templating engine
 app.engine('hbs', exphbs({ 
