@@ -1,9 +1,8 @@
 # Node.js Rest APIs with Express & MySQL example
 
-A barebones project to bootstrap MySQL, Express.js, and Node.js. Features include:  
+A barebones project to bootstrap MySQL, Express.js, and Node.js. Will add a frontend later on, possibly React. Features include: 
 
 - Basic user management system 
-    - Located under    
 - Login/Signup page
 - File upload
 - Nodemon for hot reloading

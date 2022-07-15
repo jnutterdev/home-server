@@ -1,5 +1,4 @@
 const express = require("express");
-const exphbs = require('express-handlebars');
 const app = express();
 
 const dotenv = require('dotenv');
@@ -24,13 +23,6 @@ db.sequelize.sync()
 
 // Static files
 const path = require('path');
-
-// Templating engine
-app.engine('hbs', exphbs({ 
-    extname: 'hbs',
-    layoutsDir: "./app/views/layouts/",
-    defaultLayout: 'main'    
-}));
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/app/views'));
