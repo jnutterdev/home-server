@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+    <header>
+        {{> navbar }}
+        <section class="hero is-primary mt-5 mb-5">
+            <div class="hero-body">
+                <p class="title">
+                    {{title}}
+                </p>
+                <p class="subtitle">
+                    {{subject}}
+                </p>
+            </div>
+        </section>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+        {{> footer }}
+    </div>
+</body>
+</html>
