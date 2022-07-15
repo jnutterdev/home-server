@@ -2,13 +2,25 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const app = express();
 
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 // Parse requests of content-type - application/json
 app.use(express.json());
 
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+// DB connection
+const db = require("./app/server/models");
+db.sequelize.sync()
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+
 
 // Static files
 const path = require('path');
@@ -30,7 +42,6 @@ app.get("/ping", (req, res) => {
 
 // current routes used for app
 require("./app/server/routes/main.routes.js")(app);
-require("./app/server/routes/customer.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
