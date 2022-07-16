@@ -2,29 +2,24 @@ const createError = require('http-errors');
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const indexRouter = require('./app/server/routes/index');
 const usersRouter = require('./app/server/routes/users.routes');
 
 const app = express();
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
-// Parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
 
 // DB connection
 const db = require("./app/server/models");
-db.sequelize.sync()
-  .then(() => {
-    console.log("Synced db.");
-  })
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("Drop and re-sync db.");
+})
   .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
