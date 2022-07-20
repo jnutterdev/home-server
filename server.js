@@ -2,14 +2,17 @@ const createError = require('http-errors');
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const pino = require('express-pino-logger')();
+
 const dotenv = require('dotenv');
 dotenv.config();
+
 const indexRouter = require('./app/server/routes/index');
 const usersRouter = require('./app/server/routes/users.routes');
 
 const app = express();
 
-
+app.use(pino);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
@@ -24,7 +27,7 @@ db.sequelize.sync({ force: false }).then(() => {
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -47,7 +50,7 @@ app.use(function(err, req, res, next) {
 });
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
